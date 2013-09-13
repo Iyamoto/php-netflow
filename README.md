@@ -1,10 +1,10 @@
 php-netflow
 ===========
-
 PHP NetFlow anomaly detector
 Finds malware/virus bots in LAN
 Based on NFDump
 Tested in OSSIM SEIM
+PHP 5.3, 5.4
 
 Usage
 =====
