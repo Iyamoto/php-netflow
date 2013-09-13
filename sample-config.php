@@ -3,11 +3,13 @@
 /*
  * Example config file for PHP-NetFlow
  * Rename to config.php
+ * Tuned for usage with OSSIM
  */
 $emails[] = 'name@domain.zone';//Where to report
 
 //Path
 $netflow_base_dir = '/var/cache/nfdump/flows/live/profile_id';
+$tmp_dir = '/tmp';
 
 $nfdump = '/usr/bin/nfdump';//which nfdump
 

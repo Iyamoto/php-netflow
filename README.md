@@ -4,7 +4,7 @@ php-netflow
 PHP NetFlow anomaly detector
 Finds malware/virus bots in LAN
 Based on NFDump
-Tested with OSSIM SEIM
+Tested in OSSIM SEIM
 
 Usage
 =====
@@ -20,9 +20,9 @@ Design
 Activity checker (checker.php)
     read config
     load from json
-    get date, last netflow file name (nfcapd.date) -> path to nfcapd
-    cicle throw marks
-        check nfcapd for interesting traffic with nfdump
+    get date, last netflow file name (OSSIM:.../date/nfcapd.datetime)
+    cicle throw marks(aka types of traffic)
+        check nfcapd file for interesting traffic with nfdump
         investigate suspicious IPs
         check time for last report
             mail to master
