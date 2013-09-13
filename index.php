@@ -23,7 +23,8 @@ foreach($marks as $mark){
     $command = $nfdump.' -r '.$path.' -n '.$num.' -s srcip/packets -o csv'.' "'.$filter.'"';
 
     $results = shell_exec($command);//exeCute
-    $src_data = str_to_array(results);
+    var_dump($results);
+    $src_data = str_to_array($results);
    
     //foreach($elements as $element){//TODO cicle for several IPs
         $ip = $src_data[4];
