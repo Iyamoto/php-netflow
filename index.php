@@ -66,6 +66,7 @@ function action(){
 }
 
 function str_to_array($str){
+    $str = trim($str);
     $lines = explode("\r\n",$str);
     if (sizeof($lines)==1) $lines = explode("\n",$str);
     for($i=1;$i<sizeof($lines)-4;$i++){
