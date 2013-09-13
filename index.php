@@ -20,7 +20,7 @@ foreach($marks as $mark){
     //Form filter
     $filter = "$mark and ($src) and not ($dst)";
     //Form nfdump command
-    $command = $nfdump.' -r '.$path.' -n '.$num.' -s srcip/packets'.'"'.$filter.'"';
+    $command = $nfdump.' -r '.$path.' -n '.$num.' -s srcip/packets'.' "'.$filter.'"';
     echo $command."\n";//for debug
     
     $results = shell_exec($command);//exeCute

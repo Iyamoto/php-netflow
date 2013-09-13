@@ -8,9 +8,11 @@ Tested with OSSIM SEIM
 
 Usage
 =====
+aptitude install git (if needed)
 git clone https://github.com/Iyamoto/php-netflow.git
 cp sample-config.php config.php
-replace email, path etc in config.php
+replace email, path in config.php
+php index.php
 add starter.sh to cron
 
 Design
