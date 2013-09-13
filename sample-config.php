@@ -22,5 +22,10 @@ $marks[]='proto tcp and dst port 3389';
 $marks[]='proto tcp and dst port 6667';
 
 $num = 10;//Define number of top N
+$dst_ip_lvl = 2;//Action lvl for dst IPs
 
+$debug = false;
+
+$test_results = '';
+$test_results2 = '';
 ?>

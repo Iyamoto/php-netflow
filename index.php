@@ -21,27 +21,39 @@ foreach($marks as $mark){
     $filter = $mark.' and ('.$lan_src.') and not ('.$lan_dst.')';
     //Form nfdump command
     $command = $nfdump.' -r '.$path.' -n '.$num.' -s srcip/packets -o csv'.' "'.$filter.'"';
+    if($debug) $results = $test_results;
+    else $results = shell_exec($command);//exeCute FIXME
 
-    $results = shell_exec($command);//exeCute
-    var_dump($results);
-    $src_data = str_to_array($results);
-   
-    //foreach($elements as $element){//TODO cicle for several IPs
-        $ip = $src_data[4];
-        echo "[+] Found suspicious IP: $ip\n";
+    $src_datas = str_to_array($results);
+    if(!$src_datas) continue;
+    foreach($src_datas as $src_data){
+        $src_ip = $src_data[4];
+        echo "[+] Found suspicious IP: $src_ip\n";
         //Check DST Ips
-        $filter = $mark.' and src ip '.$ip.' and not ('.$lan_dst.')';
+        $filter = $mark.' and src ip '.$src_ip.' and not ('.$lan_dst.')';
         $command = $nfdump.' -r '.$path.' -n 100 -s dstip/packets -o csv'.' "'.$filter.'"';
-        $results = shell_exec($command);
-        var_dump($results);
-        $dst_data = str_to_array($results);
-    //}
+        if($debug) $results = $test_results2;
+        else $results = shell_exec($command);//FIXME
+        
+        $dst_datas = str_to_array($results);
+        if(!$dst_datas) continue;
+        $dst_ip_count = sizeof($dst_datas);
+        if($dst_ip_count>$dst_ip_lvl){
+            echo "[+] Destination IP stats\n";
+            echo "[+] TIME\tIP\tPackets\tBytes\n";
+            foreach($dst_datas as $dst_data){
+                $time = $dst_data[0];
+                $dst_ip = $dst_data[4];
+                $packets = $dst_data[7];
+                $bytes = $dst_data[9];
+                echo "[+] $time\t$dst_ip\t$packets\t$bytes\n";
+                //Form evidence TODO
+            }
+            action();
+        } else "[-] Too few dst IPs for $src_ip\n";
+    }
    
     break;
-    //Parse results, return suspects
-    //If suspects check dst IPs
-    //If many (>5?) report to email
-    //TODO
 }
 
 //Save suspects
@@ -49,11 +61,17 @@ foreach($marks as $mark){
 $exec_time = round(microtime(true) - $exec_time,2);
 echo "[i] Execution time: $exec_time sec.\n";
 
+function action(){
+    //mail
+}
+
 function str_to_array($str){
     $lines = explode("\r\n",$str);
     if (sizeof($lines)==1) $lines = explode("\n",$str);
-    //var_dump($lines);
-    $elements = explode(',',$lines[1]);   //TODO add cicle for several ips 
-    return $elements;
+    for($i=1;$i<sizeof($lines)-4;$i++){
+        $elements[] = explode(',',$lines[$i]);   //TODO add cicle for several ips 
+    }
+    if(sizeof($elements)>0) return $elements;
+    else return false;
 }
 ?>

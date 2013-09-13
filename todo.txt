@@ -2,3 +2,4 @@ TODO
 ====
 Write sh scritp for cron
 Mail template?
+What to do with similar (==IP) alarms? send every one?
