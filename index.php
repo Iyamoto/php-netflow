@@ -12,7 +12,7 @@ echo "\n[+] Started\n";
 
 //Get netflow data
 $netflow_current_dir = '2013-09-13';//TODO add date detection
-$netflow_last_file = 'nfcapd.1';//FIXME add last file detection 
+$netflow_last_file = 'nfcapd.201309131615';//FIXME add last file detection 
 $path = $netflow_base_dir. DIRECTORY_SEPARATOR .$netflow_current_dir. DIRECTORY_SEPARATOR .$netflow_last_file;
 
 //Check marks, main cicle
