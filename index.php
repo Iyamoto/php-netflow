@@ -20,11 +20,12 @@ foreach($marks as $mark){
     //Form filter
     $filter = $mark.' and ('.$lan_src.') and not ('.$lan_dst.')';
     //Form nfdump command
-    $command = $nfdump.' -r '.$path.' -n '.$num.' -s srcip/packets'.' "'.$filter.'"';
-    echo $command."\n";//for debug
+    $command = $nfdump.' -r '.$path.' -n '.$num.' -s srcip/packets -o csv'.' "'.$filter.'"';
+    //echo $command."\n";//for debug
     
     $results = shell_exec($command);//exeCute
-    var_dump($results);
+    $elements = str_to_array($results);
+    var_dump($elements);
     break;
     //Parse results, return suspects
     //If suspects check dst IPs
@@ -36,4 +37,12 @@ foreach($marks as $mark){
 
 $exec_time = round(microtime(true) - $exec_time,2);
 echo "[i] Execution time: $exec_time sec.\n";
+
+function str_to_array($results){
+    $lines = explode("\r\n",$str);
+    if (sizeof($lines)==1) $lines = explode("\n",$str);
+    var_dump($lines);
+    $elements = explode(',',$lines[1]);    
+    return $elements;
+}
 ?>
