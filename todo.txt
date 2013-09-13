@@ -1,9 +1,4 @@
 TODO
 ====
-Add to github
 Write sh scritp for cron
-
-Design
-======
-read config
-get date, last netflow file name
+Mail template?
