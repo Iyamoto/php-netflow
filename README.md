@@ -16,10 +16,11 @@ add starter.sh to cron
 Design
 ======
 read config
-get date, last netflow file name (nfcapd.date)
-check nfcapd for interesting traffic with nfdump
-investigate suspicious IPs
-mail to master
+get date, last netflow file name (nfcapd.date) -> path to nfcapd
+cicle throw marks
+    check nfcapd for interesting traffic with nfdump
+    investigate suspicious IPs
+    mail to master
 
 Detection
 =========
