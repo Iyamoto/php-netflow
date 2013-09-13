@@ -12,7 +12,7 @@ echo "\n[+] Started\n";
 
 //Get netflow data
 $netflow_current_dir = '2013-09-13';//TODO add date detection
-$netflow_last_file = 'nfcapd.201309131615';//FIXME add last file detection 
+$netflow_last_file = 'nfcapd.201309131735';//FIXME add last file detection 
 $path = $netflow_base_dir. DIRECTORY_SEPARATOR .$netflow_current_dir. DIRECTORY_SEPARATOR .$netflow_last_file;
 
 //Check marks, main cicle
@@ -72,7 +72,6 @@ function str_to_array($str){
     for($i=1;$i<sizeof($lines)-4;$i++){
         $elements[] = explode(',',$lines[$i]); 
     }
-    var_dump($elements);
     if(sizeof($elements)>0) return $elements;
     else return false;
 }
