@@ -40,7 +40,7 @@ foreach($marks as $mark){
         $dst_ip_count = sizeof($dst_datas);
         if($dst_ip_count>$dst_ip_lvl){
             echo "[+] Destination IP stats\n";
-            echo "[+] TIME\tIP\tPackets\tBytes\n";
+            echo "[+] TIME\t\tIP\tPackets\tBytes\n";
             foreach($dst_datas as $dst_data){
                 $time = $dst_data[0];
                 $dst_ip = $dst_data[4];
@@ -50,7 +50,7 @@ foreach($marks as $mark){
                 //Form evidence TODO
             }
             action();
-        } else "[-] Too few dst IPs for $src_ip\n";
+        } else "[-] Too few DST IPs for $src_ip\n";
     }
    
     break;
@@ -69,8 +69,9 @@ function str_to_array($str){
     $lines = explode("\r\n",$str);
     if (sizeof($lines)==1) $lines = explode("\n",$str);
     for($i=1;$i<sizeof($lines)-4;$i++){
-        $elements[] = explode(',',$lines[$i]);   //TODO add cicle for several ips 
+        $elements[] = explode(',',$lines[$i]); 
     }
+    var_dump($elements);
     if(sizeof($elements)>0) return $elements;
     else return false;
 }
