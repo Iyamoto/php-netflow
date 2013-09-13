@@ -21,12 +21,21 @@ foreach($marks as $mark){
     $filter = $mark.' and ('.$lan_src.') and not ('.$lan_dst.')';
     //Form nfdump command
     $command = $nfdump.' -r '.$path.' -n '.$num.' -s srcip/packets -o csv'.' "'.$filter.'"';
-    //echo $command."\n";//for debug
-    
+
     $results = shell_exec($command);//exeCute
-    var_dump($results);
-    $elements = str_to_array($results);
-    var_dump($elements);
+    $src_data = str_to_array(results);
+   
+    //foreach($elements as $element){//TODO cicle for several IPs
+        $ip = $src_data[4];
+        echo "[+] Found suspicious IP: $ip\n";
+        //Check DST Ips
+        $filter = $mark.' and src ip '.$ip.' and not ('.$lan_dst.')';
+        $command = $nfdump.' -r '.$path.' -n 100 -s dstip/packets -o csv'.' "'.$filter.'"';
+        $results = shell_exec($command);
+        var_dump($results);
+        $dst_data = str_to_array($results);
+    //}
+   
     break;
     //Parse results, return suspects
     //If suspects check dst IPs
@@ -39,11 +48,11 @@ foreach($marks as $mark){
 $exec_time = round(microtime(true) - $exec_time,2);
 echo "[i] Execution time: $exec_time sec.\n";
 
-function str_to_array($results){
+function str_to_array($str){
     $lines = explode("\r\n",$str);
     if (sizeof($lines)==1) $lines = explode("\n",$str);
-    var_dump($lines);
-    $elements = explode(',',$lines[1]);    
+    //var_dump($lines);
+    $elements = explode(',',$lines[1]);   //TODO add cicle for several ips 
     return $elements;
 }
 ?>
