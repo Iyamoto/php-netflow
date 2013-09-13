@@ -18,13 +18,14 @@ $path = $netflow_base_dir. DIRECTORY_SEPARATOR .$netflow_current_dir. DIRECTORY_
 //Check marks, main cicle
 foreach($marks as $mark){
     //Form filter
-    $filter = $mark.' and ('.$src.') and not ('.$dst.')';
+    $filter = $mark.' and ('.$lan_src.') and not ('.$lan_dst.')';
     //Form nfdump command
     $command = $nfdump.' -r '.$path.' -n '.$num.' -s srcip/packets'.' "'.$filter.'"';
     echo $command."\n";//for debug
     
     $results = shell_exec($command);//exeCute
     var_dump($results);
+    break;
     //Parse results, return suspects
     //If suspects check dst IPs
     //If many (>5?) report to email
