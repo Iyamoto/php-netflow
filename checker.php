@@ -34,6 +34,7 @@ foreach($marks as $mark){
     }    
     foreach($src_datas as $src_data){
         $src_ip = $src_data[4];
+        //TODO Check whitelists
         echo "[+] Found suspicious IP: $src_ip\n";
         //Check DST Ips
         $filter = $mark.' and src ip '.$src_ip.' and not ('.$lan_dst.')';

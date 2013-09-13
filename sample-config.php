@@ -20,8 +20,9 @@ $lan_dst = 'dst net 10.0/8 or dst net 192.168/16';
 //What are we looking for?
 $marks[]='proto icmp and icmp-type 8';
 $marks[]='dst port 53';
-$marks[]='proto tcp and dst port 3389';
-$marks[]='proto tcp and dst port 6667';
+$marks[]='proto tcp and dst port 3389';//something like Morto
+$marks[]='proto tcp and dst port 6667';//bots looking for C&C?
+$marks[]='proto tcp and dst port 25';//Spam bots
 
 $num = 10;//Define number of top N
 $dst_ip_lvl = 5;//Action lvl for dst IPs

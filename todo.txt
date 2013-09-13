@@ -7,13 +7,22 @@ Collect full info from netflow about an evil IP?
     dst ports
     src ports
 
-Write starter.sh scritp for cron
+Write scripts for cron
+    sample-checker.sh
+    sample-reporter.sh
+
+Whitelists? 
+    Internal DNS, DC, mail servers and relays
+
 Mail template?
 What to do with similar (==IP) alarms? send every one?
 Multiple emails support
 Web
     Daily stats
     Current activity
+Promo
+    post to OSSIM forum
+    add to PHP Classes
 
 IDEAS
 =====

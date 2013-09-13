@@ -42,6 +42,8 @@ Looking for trafic from sigle LAN IP to multiple outside IPs
 echo requests: proto icmp and icmp-type 8
 DNS requests: dst port 53
 RDP: proto tcp and dst port 3389
+SMTP: proto tcp and dst port 25
+445?
 
 Filter Syntax
 =============
