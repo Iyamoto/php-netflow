@@ -12,12 +12,12 @@ aptitude install git (if needed)
 git clone https://github.com/Iyamoto/php-netflow.git
 cp sample-config.php config.php
 replace email, netflow_base_dir in config.php
-php index.php
+php checker.php
 add starter.sh to cron
 
 Design
 ======
-Activity checker
+Activity checker (checker.php)
     read config
     load from json
     get date, last netflow file name (nfcapd.date) -> path to nfcapd
@@ -28,7 +28,7 @@ Activity checker
             mail to master
     save to json
 
-Reporter
+Reporter (reporter.php)
     read config
     load from json
     
