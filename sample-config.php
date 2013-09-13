@@ -4,10 +4,10 @@
  * Example config file for PHP-NetFlow
  * Rename to config.php
  */
-$email = 'name@domain.zone';//Where to report
+$emails[] = 'name@domain.zone';//Where to report
 
 //Path
-$netflow_base_dir = '/var/cache/nfdump/flows/live/4217FB546AC8F2E170FB0D58286FF0DD';
+$netflow_base_dir = '/var/cache/nfdump/flows/live/profile_id';
 
 $nfdump = '/usr/bin/nfdump';//which nfdump
 
@@ -22,7 +22,7 @@ $marks[]='proto tcp and dst port 3389';
 $marks[]='proto tcp and dst port 6667';
 
 $num = 10;//Define number of top N
-$dst_ip_lvl = 2;//Action lvl for dst IPs
+$dst_ip_lvl = 5;//Action lvl for dst IPs
 
 $debug = false;
 
