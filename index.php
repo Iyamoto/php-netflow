@@ -24,6 +24,7 @@ foreach($marks as $mark){
     //echo $command."\n";//for debug
     
     $results = shell_exec($command);//exeCute
+    var_dump($results);
     $elements = str_to_array($results);
     var_dump($elements);
     break;
