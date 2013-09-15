@@ -17,16 +17,35 @@ add starter.sh to cron
 
 Design
 ======
+Data structures
+onerun.json
+one_run[] -> src ip 
+          -> mark (type of traffic)
+          -> evidences[] = $time."\t".$dst_ip."\t".$packets."\t".$bytes."\n"
+
+daily json
+daily[IP] -> marks[] -> evidences[]
+
 Activity checker (checker.php)
     read config
-    load from json
     get date, last netflow file name (OSSIM:.../date/nfcapd.datetime)
-    cicle throw marks(aka types of traffic)
+    cycle throw marks(aka types of traffic)
         check nfcapd file for interesting traffic with nfdump
         investigate suspicious IPs
-        check time for last report
-            mail to master
     save to json
+
+Filter
+load from one_run json
+load from daily json
+cycle one_run data
+    check if ip uniq (absent in daily db)
+        insert to daily db
+        start action()
+    else 
+        add new data to daily[IP]
+            
+save daily json
+
 
 Reporter (reporter.php)
     read config

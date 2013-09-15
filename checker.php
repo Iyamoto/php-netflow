@@ -4,10 +4,9 @@
  * NetFlow anomaly detector
  * Finds evil activity in LAN
  */
-
-mb_internal_encoding("UTF-8");
 $exec_time = microtime(true);
 require_once 'config.php';
+require_once 'functions.php';
 echo "\n[+] Started\n";
 
 //Get netflow data
@@ -18,6 +17,7 @@ $path = $netflow_base_dir. DIRECTORY_SEPARATOR .$netflow_current_dir. DIRECTORY_
 //TODO read data from json
 
 //Check marks, main cicle
+$suspect_counter = 0;
 foreach($marks as $mark){
     //Form filter
     $filter = $mark.' and ('.$lan_src.') and not ('.$lan_dst.')';
@@ -52,7 +52,6 @@ foreach($marks as $mark){
         if($dst_ip_count>=$dst_ip_lvl){
             echo "[+] Destination IP stats\n";
             echo "[+] TIME\t\tIP\tPackets\tBytes\n";
-            $evidence = '';
             foreach($dst_datas as $dst_data){
                 $time = $dst_data[0];
                 $dst_ip = $dst_data[4];
@@ -60,41 +59,23 @@ foreach($marks as $mark){
                 $bytes = $dst_data[9];
                 echo "[+] $time\t$dst_ip\t$packets\t$bytes\n";
                 //Form evidence
-                $evidence.=$time."\t".$dst_ip."\t".$packets."\t".$bytes."\n";
+                $evidences[] =$time."\t".$dst_ip."\t".$packets."\t".$bytes."\n";
             }
-            action($emails, $src_ip, $evidence);
+            $one_run[$suspect_counter]['IP'] = $src_ip;
+            $one_run[$suspect_counter]['type'] = $mark;
+            $one_run[$suspect_counter]['evidences'] = $evidences;
+            $suspect_counter++;
+            unset($evidences);
+            //action($emails, $src_ip, $evidence);//TODO remove
         } else "[-] Too few DST IPs for $src_ip\n";
     }
-   
-    break;
 }
 
-//TODO Save suspects to json
+//Save suspects to json
+if (save_json($db_file, $one_run))
+    echo "[+] Saved\n";
 
 $exec_time = round(microtime(true) - $exec_time,2);
 echo "[i] Execution time: $exec_time sec.\n";
 
-function action($emails, $src_ip, $evidence){
-    $subject = "Detected evil IP: $src_ip";
-    foreach($emails as $email){
-        mail($email,$subject,$evidence);
-    }    
-}
-
-function get_netflow($command){
-    $results = shell_exec($command);//exeCute 
-    $data = str_to_array($results);
-    return $data;
-}
-
-function str_to_array($str){
-    $str = trim($str);
-    $lines = explode("\r\n",$str);
-    if (sizeof($lines)==1) $lines = explode("\n",$str);
-    for($i=1;$i<sizeof($lines)-4;$i++){
-        $elements[] = explode(',',$lines[$i]); 
-    }
-    if(sizeof($elements)>0) return $elements;
-    else return false;
-}
 ?>

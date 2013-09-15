@@ -5,13 +5,17 @@
  * Rename to config.php
  * Tuned for usage with OSSIM
  */
-$emails[] = 'name@domain.zone';//Where to report
 
-//Path
-$netflow_base_dir = '/var/cache/nfdump/flows/live/profile_id';
-$tmp_dir = '/tmp';
+//$emails and $netflow_base_dir must be set 
+$emails[] = 'name@domain.zone';//Whom to report
+$netflow_base_dir = '/var/cache/nfdump/flows/live/profile_id';//Where to look for netflow data
 
+$tmp_dir = '/tmp/phpnetflow';
+if (!is_dir($tmp_dir))
+    mkdir($tmp_dir);
+$db_file = $tmp_dir . DIRECTORY_SEPARATOR . 'onerun.gz';
 $nfdump = '/usr/bin/nfdump';//which nfdump
+
 
 //NFDump filters
 $lan_src = 'src net 10.0/8 or src net 192.168/16';
