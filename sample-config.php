@@ -30,6 +30,7 @@ $marks[]='dst port 53';
 $marks[]='proto tcp and dst port 3389';//something like Morto
 $marks[]='proto tcp and dst port 6667';//bots looking for C&C?
 $marks[]='proto tcp and dst port 25';//Spam bots
+$marks[]='proto tcp and dst port 445';//? bots
 
 $whitelist['proto icmp and icmp-type 8'][]='10.10.10.1';//White IP for first mark
 $whitelist['dst port 53'][]='10.10.10.2';//White IP for second mark

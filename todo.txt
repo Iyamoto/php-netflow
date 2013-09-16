@@ -5,7 +5,10 @@ Collect full info from netflow about an evil IP?
     dst ports
     src ports
 
-Mail template?
+Reporter
+    Stats
+    Archive
+    More
 
 Promo
     post to OSSIM forum
