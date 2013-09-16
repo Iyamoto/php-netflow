@@ -15,7 +15,7 @@ if ($one_run) {
     echo "[+] Read $one_run_size blocks from $db_file\n";
 }
 else
-    exit('Problem with db_file');
+    exit('Problem with one_run file');
 
 //Read daily data
 $daily = read_db_from_file($daily_db_file);
@@ -29,19 +29,19 @@ if ($daily) { //Daily db exists
             if ($one_run_block['IP'] == $daily_block_ip) {//IP found
                 echo "[i] $daily_block_ip found\n";
                 $is_type_found = false;
-                foreach ($daily_block_types as $daily_block_type=>$daily_block_evidences) {
-                     if($one_run_block['type']==$daily_block_type){//Traffic type found
-                        foreach($one_run_block['evidences'] as $evidence){    
-                            $daily[$one_run_block['IP']][$one_run_block['type']][]=$evidence;
+                foreach ($daily_block_types as $daily_block_type => $daily_block_evidences) {
+                    if ($one_run_block['type'] == $daily_block_type) {//Traffic type found
+                        foreach ($one_run_block['evidences'] as $evidence) {
+                            $daily[$one_run_block['IP']][$one_run_block['type']][] = $evidence;
                         }
                         $is_type_found = true;
                         break;
                     }
                 }
                 //Traffic type not found
-                if(!$is_type_found){
+                if (!$is_type_found) {
                     $tmp_type = $one_run_block['type'];
-                    echo "[i] Traffic type $tmp_type not found\n";  
+                    echo "[i] Traffic type $tmp_type not found\n";
                     $daily[$one_run_block['IP']][$one_run_block['type']] = $one_run_block['evidences'];
                 }
                 $is_ip_found = true;
@@ -53,6 +53,9 @@ if ($daily) { //Daily db exists
             $tmp_ip = $one_run_block['IP'];
             echo "[i] IP $tmp_ip not found\n";
             $daily[$one_run_block['IP']][$one_run_block['type']] = $one_run_block['evidences'];
+            //time for some action
+            if (!$debug)
+                action($emails, $one_run_block['IP'], $one_run_block['type'], $one_run_block['evidences']);
         }
     }
 } else { //Daily db is empty

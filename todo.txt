@@ -10,10 +10,6 @@ Collect full info from netflow about an evil IP?
 
 Mail template?
 
-Web
-    Daily stats
-    Current activity
-    bots found
 Promo
     post to OSSIM forum
     add to PHP Classes

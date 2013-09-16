@@ -5,10 +5,12 @@
  */
 mb_internal_encoding("UTF-8");
 
-function action($emails, $src_ip, $evidence) {
+function action($emails, $src_ip, $type, $evidence) {
     $subject = "Detected evil IP: $src_ip";
+    $text = implode("\n", $evidence);
+    $body = $type . "\n";
     foreach ($emails as $email) {
-        //mail($email,$subject,$evidence);
+        mail($email, $subject, $body);
     }
 }
 
@@ -87,5 +89,6 @@ function get_lastmodified_file($dir) {
     }
     else
         return false;
-}    
+}
+
 ?>
