@@ -79,7 +79,6 @@ foreach ($marks as $mark) {
             $one_run[$suspect_counter]['evidences'] = $evidences;
             $suspect_counter++;
             unset($evidences);
-            //action($emails, $src_ip, $evidence);//TODO remove
         }
         else
             "[-] Too few DST IPs for $src_ip\n";
