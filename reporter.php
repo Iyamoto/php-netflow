@@ -38,7 +38,7 @@ if ($daily) { //Daily db exists
                 //$table = $tr . "\n" . $table;
                 $table .= $tr . "\n";
                 $evidence_counter++;
-                if($evidence_counter>10) break;
+                if($evidence_counter>9) break;
             }
             
             $html_block = str_replace('$table', $table, $html_block_type);
