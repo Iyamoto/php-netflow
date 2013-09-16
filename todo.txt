@@ -9,7 +9,6 @@ Collect full info from netflow about an evil IP?
     src ports
 
 Write scripts for cron
-    sample-checker.sh
     sample-reporter.sh
 
 Mail template?
