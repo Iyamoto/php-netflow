@@ -36,7 +36,7 @@ foreach($marks as $mark){
     foreach($src_datas as $src_data){
         $src_ip = $src_data[4];
         //TODO Check whitelists
-        echo "[+] Found suspicious IP: $src_ip\n";
+        
         //Check DST Ips
         $filter = $mark.' and src ip '.$src_ip.' and not ('.$lan_dst.')';
         $command = $nfdump.' -r '.$path.' -n 100 -s dstip/packets -o csv'.' "'.$filter.'"';
@@ -51,6 +51,7 @@ foreach($marks as $mark){
         }    
         $dst_ip_count = sizeof($dst_datas);
         if($dst_ip_count>=$dst_ip_lvl){
+            echo "[+] Found suspicious IP: $src_ip\n";
             echo "[+] Destination IP stats\n";
             echo "[+] TIME\t\tIP\tPackets\tBytes\n";
             foreach($dst_datas as $dst_data){
