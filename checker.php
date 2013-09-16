@@ -72,7 +72,7 @@ foreach ($marks as $mark) {
                 $bytes = $dst_data[9];
                 echo "[+] $time\t$dst_ip\t$packets\t$bytes\n";
                 //Form evidence
-                $evidences[] = $time . "\t" . $dst_ip . "\t" . $packets . "\t" . $bytes . "\n";
+                $evidences[] = $time . "\t" . $dst_ip . "\t" . $packets . "\t" . $bytes;
             }
             $one_run[$suspect_counter]['IP'] = $src_ip;
             $one_run[$suspect_counter]['type'] = $mark;
