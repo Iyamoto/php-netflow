@@ -33,6 +33,7 @@ $marks[]='proto tcp and dst port 25';//Spam bots
 
 $whitelist['proto icmp and icmp-type 8'][]='10.10.10.1';//White IP for first mark
 $whitelist['dst port 53'][]='10.10.10.2';//White IP for second mark
+//TODO add netmask support for whitelist
 
 $num = 10;//Define number of top N
 $dst_ip_lvl = 5;//Action lvl for dst IPs
