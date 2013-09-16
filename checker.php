@@ -16,7 +16,7 @@ if ($debug)
     $netflow_last_file = 'nfcapd.201309131735';
 else {
     $netflow_last_file = get_lastmodified_file($netflow_base_dir . DIRECTORY_SEPARATOR . $netflow_current_dir);
-    var_dump($netflow_last_file);
+    echo "[+] Reading data from $netflow_last_file\n";
 }
 $path = $netflow_base_dir . DIRECTORY_SEPARATOR . $netflow_current_dir . DIRECTORY_SEPARATOR . $netflow_last_file;
 
