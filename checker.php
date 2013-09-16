@@ -10,17 +10,15 @@ require_once 'functions.php';
 echo "\n[+] Started\n";
 
 //Get netflow data
-$netflow_current_dir = '2013-09-16'; //TODO add date detection
+$netflow_current_dir = date("Y-m-d");
 //Detect last modified netflow data file
 if ($debug)
     $netflow_last_file = 'nfcapd.201309131735';
-else {
+else
     $netflow_last_file = get_lastmodified_file($netflow_base_dir . DIRECTORY_SEPARATOR . $netflow_current_dir);
-    echo "[+] Reading data from $netflow_last_file\n";
-}
+
+echo "[+] Reading data from $netflow_last_file\n";
 $path = $netflow_base_dir . DIRECTORY_SEPARATOR . $netflow_current_dir . DIRECTORY_SEPARATOR . $netflow_last_file;
-
-
 
 //TODO read data from json
 //Check marks, main cicle
