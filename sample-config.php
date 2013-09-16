@@ -11,10 +11,11 @@ $emails[] = 'name@domain.zone';//Whom to report
 $netflow_base_dir = '/var/cache/nfdump/flows/live/profile_id';//Where to look for netflow data
 
 $tmp_dir = '/tmp/phpnetflow';
+$today = date("Y-m-d");
 if (!is_dir($tmp_dir))
     mkdir($tmp_dir);
 $db_file = $tmp_dir . DIRECTORY_SEPARATOR . 'onerun.gz';
-$daily_db_file = $tmp_dir . DIRECTORY_SEPARATOR . 'daily.gz';
+$daily_db_file = $tmp_dir . DIRECTORY_SEPARATOR . 'daily'.$today.'.gz';
 $nfdump = '/usr/bin/nfdump';//which nfdump
 
 

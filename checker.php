@@ -10,7 +10,7 @@ require_once 'functions.php';
 echo "\n[+] Started\n";
 
 //Get netflow data
-$netflow_current_dir = date("Y-m-d");
+$netflow_current_dir = $today;
 //Detect last modified netflow data file
 if ($debug)
     $netflow_last_file = 'nfcapd.201309131735';
