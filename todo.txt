@@ -2,14 +2,11 @@ TODO
 ====
 
 invent reporter module
-save day data to json
+
 Collect full info from netflow about an evil IP?
     protocols
     dst ports
     src ports
-
-Write scripts for cron
-    sample-reporter.sh
 
 Mail template?
 
