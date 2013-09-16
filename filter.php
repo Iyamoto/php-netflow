@@ -22,11 +22,44 @@ $daily = read_db_from_file($daily_db_file);
 if ($daily) { //Daily db exists
     $daily_size = sizeof($daily);
     echo "[+] Read $daily_size daily blocks\n";
-    //TODO add to daily
-}   else { //Daily db is empty
+    //Add to daily
+    foreach ($one_run as $one_run_block) {
+        $is_ip_found = false;
+        foreach ($daily as $daily_block_ip => $daily_block_types) {
+            if ($one_run_block['IP'] == $daily_block_ip) {//IP found
+                echo "[i] $daily_block_ip found\n";
+                $is_type_found = false;
+                foreach ($daily_block_types as $daily_block_type=>$daily_block_evidences) {
+                     if($one_run_block['type']==$daily_block_type){//Traffic type found
+                        foreach($one_run_block['evidences'] as $evidence){    
+                            $daily[$one_run_block['IP']][$one_run_block['type']][]=$evidence;
+                        }
+                        $is_type_found = true;
+                        break;
+                    }
+                }
+                //Traffic type not found
+                if(!$is_type_found){
+                    $tmp_type = $one_run_block['type'];
+                    echo "[i] Traffic type $tmp_type not found\n";  
+                    $daily[$one_run_block['IP']][$one_run_block['type']] = $one_run_block['evidences'];
+                }
+                $is_ip_found = true;
+                break; //go to next ip
+            }
+        }
+        //IP not found
+        if (!$is_ip_found) {
+            $tmp_ip = $one_run_block['IP'];
+            echo "[i] IP $tmp_ip not found\n";
+            $daily[$one_run_block['IP']][$one_run_block['type']] = $one_run_block['evidences'];
+        }
+    }
+} else { //Daily db is empty
+    unset($daily);
     //Form daily db
     $daily_counter = 0;
-    foreach($one_run as $block){
+    foreach ($one_run as $block) {
         $daily[$block['IP']][$block['type']] = $block['evidences'];
         $daily_counter++;
     }
@@ -39,5 +72,4 @@ if (save_json($daily_db_file, $daily))
 
 $exec_time = round(microtime(true) - $exec_time, 2);
 echo "[i] Execution time: $exec_time sec.\n";
-
 ?>
