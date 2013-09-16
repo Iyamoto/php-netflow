@@ -10,8 +10,9 @@ function action($emails, $src_ip, $type, $evidence) {
     $text = implode("\n", $evidence);
     $body = $type . "\n";
     foreach ($emails as $email) {
-        mail($email, $subject, $body);
+        $results[] = mail($email, $subject, $body);
     }
+    return $results;
 }
 
 function get_netflow($command) {

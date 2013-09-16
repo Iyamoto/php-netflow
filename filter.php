@@ -54,8 +54,10 @@ if ($daily) { //Daily db exists
             echo "[i] IP $tmp_ip not found\n";
             $daily[$one_run_block['IP']][$one_run_block['type']] = $one_run_block['evidences'];
             //time for some action
-            if (!$debug)
-                action($emails, $one_run_block['IP'], $one_run_block['type'], $one_run_block['evidences']);
+            if (!$debug) {
+                $mail_results = action($emails, $one_run_block['IP'], $one_run_block['type'], $one_run_block['evidences']);
+                var_dump($mail_results);
+            }    
         }
     }
 } else { //Daily db is empty
