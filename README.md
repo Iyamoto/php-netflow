@@ -35,8 +35,11 @@ Activity checker (checker.php)
     save to json
 
 Filter
-load from one_run json
-load from daily json
+    load from one_run json
+    if daily db exists
+        load from daily json
+    if daily db empty    
+        
 cycle one_run data
     check if ip uniq (absent in daily db)
         insert to daily db
