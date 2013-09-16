@@ -11,6 +11,7 @@ $emails[] = 'name@domain.zone';//Whom to report
 $netflow_base_dir = '/var/cache/nfdump/flows/live/profile_id';//Where to look for netflow data
 $web_dir = '/var/www/botolovka';
 $tmp_dir = '/tmp/phpnetflow';
+$tpl_dir = 'ru-tpl';
 $today = date("Y-m-d");
 if (!is_dir($tmp_dir))
     mkdir($tmp_dir);

@@ -9,7 +9,6 @@ require_once 'config.php';
 require_once 'functions.php';
 echo "\n[+] Started\n";
 
-$tpl_dir = 'ru-tpl';
 $index_template_file = $tpl_dir . DIRECTORY_SEPARATOR . 'index.html';
 $block_template_file = $tpl_dir . DIRECTORY_SEPARATOR . 'block.html';
 $table_row_template_file = $tpl_dir . DIRECTORY_SEPARATOR . 'table-row.html';
