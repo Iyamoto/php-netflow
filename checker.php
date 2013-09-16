@@ -20,6 +20,7 @@ $path = $netflow_base_dir. DIRECTORY_SEPARATOR .$netflow_current_dir. DIRECTORY_
 $suspect_counter = 0;
 foreach($marks as $mark){
     //Form filter
+    echo "[+] Looking for $mark traffic\n";
     $filter = $mark.' and ('.$lan_src.') and not ('.$lan_dst.')';
     //Form nfdump command, sort order: packets
     $command = $nfdump.' -r '.$path.' -n '.$num.' -s srcip/packets -o csv'.' "'.$filter.'"';
