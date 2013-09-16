@@ -28,6 +28,8 @@ $marks[]='proto tcp and dst port 3389';//something like Morto
 $marks[]='proto tcp and dst port 6667';//bots looking for C&C?
 $marks[]='proto tcp and dst port 25';//Spam bots
 
+$whitelist[]='10.10.10.10';
+
 $num = 10;//Define number of top N
 $dst_ip_lvl = 5;//Action lvl for dst IPs
 

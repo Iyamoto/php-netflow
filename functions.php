@@ -59,4 +59,11 @@ function read_db_from_file($filename){
     }    
 }
 
+function check_whitelist($ip,&$whitelist){
+    foreach($whitelist as $white_ip){
+        if($ip==$white_ip) return true;
+    }
+    return false;
+}
+
 ?>
