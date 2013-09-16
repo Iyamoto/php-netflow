@@ -69,7 +69,6 @@ if ($daily) { //Daily db exists
         $daily_counter++;
     }
 }
-var_dump($daily);
 
 //Save daily data to json
 if (save_json($daily_db_file, $daily))
