@@ -56,8 +56,11 @@ if ($daily) { //Daily db exists
             //time for some action
             if (!$debug) {
                 $mail_results = action($emails, $one_run_block['IP'], $one_run_block['type'], $one_run_block['evidences']);
-                var_dump($mail_results);
-            }    
+                if ($mail_results)
+                    echo "[+] Mail sent\n";
+                else
+                    var_dump($mail_results);
+            }
         }
     }
 } else { //Daily db is empty
@@ -67,6 +70,13 @@ if ($daily) { //Daily db exists
     foreach ($one_run as $block) {
         $daily[$block['IP']][$block['type']] = $block['evidences'];
         $daily_counter++;
+        if (!$debug) {
+            $mail_results = action($emails, $block['IP'], $block['type'], $block['evidences']);
+            if ($mail_results)
+                echo "[+] Mail sent\n";
+            else
+                var_dump($mail_results);
+        }
     }
 }
 
