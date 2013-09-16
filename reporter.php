@@ -45,6 +45,7 @@ if ($daily) { //Daily db exists
         }
         $html_blocks = $html_block . "\n" . $html_blocks;
     }
+    $html_blocks = preg_replace('|<hr>$|', '', $html_blocks);
     $html = str_replace('$blocks', $html_blocks, $html_index_tpl);
     $html = str_replace('$today', $today, $html);
     if (file_put_contents($web_dir . DIRECTORY_SEPARATOR . 'index.html', $html))
