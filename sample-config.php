@@ -9,7 +9,7 @@
 //$emails and $netflow_base_dir must be set 
 $emails[] = 'name@domain.zone';//Whom to report
 $netflow_base_dir = '/var/cache/nfdump/flows/live/profile_id';//Where to look for netflow data
-
+$web_dir = '/var/www/botolovka';
 $tmp_dir = '/tmp/phpnetflow';
 $today = date("Y-m-d");
 if (!is_dir($tmp_dir))
