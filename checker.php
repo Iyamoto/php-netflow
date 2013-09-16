@@ -33,9 +33,10 @@ foreach ($marks as $mark) {
     if (!$src_datas) {
         echo "[-] Suspicious IPs for mark: $mark not found\n";
         continue;
-    }
+    } 
     foreach ($src_datas as $src_data) {
         $src_ip = $src_data[4];
+        //echo "[+] Found suspicious IP: $src_ip\n";
         //TODO Check whitelists
         if (isset($whitelist[$mark]))
             if (check_whitelist($src_ip, $whitelist[$mark]))
