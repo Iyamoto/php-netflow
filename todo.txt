@@ -1,8 +1,5 @@
 TODO
 ====
-
-invent reporter module
-
 Collect full info from netflow about an evil IP?
     protocols
     dst ports

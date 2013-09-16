@@ -1,0 +1,56 @@
+<?php
+
+/*
+ * HTML reports generator for PHP-NetFlow
+ */
+
+$exec_time = microtime(true);
+require_once 'config.php';
+require_once 'functions.php';
+echo "\n[+] Started\n";
+
+$tpl_dir = 'ru-tpl';
+$index_template_file = $tpl_dir. DIRECTORY_SEPARATOR .'index.html';
+$block_template_file = $tpl_dir. DIRECTORY_SEPARATOR .'block.html';
+$table_row_template_file = $tpl_dir. DIRECTORY_SEPARATOR .'table-row.html';
+
+//Read daily data
+$daily = read_db_from_file($daily_db_file);
+if ($daily) { //Daily db exists
+    $daily_size = sizeof($daily);
+    echo "[+] Read $daily_size daily blocks\n";
+    $html_index_tpl = load_from_template($index_template_file);
+    $html_block_tpl = load_from_template($block_template_file);
+    $html_table_row_tpl = load_from_template($table_row_template_file);
+    $html_blocks = '';
+    foreach($daily as $ip=>$types){
+        $html_block_ip = str_replace('$ip', $ip, $html_block_tpl);
+        foreach ($types as $type => $evidences){
+            $html_block_type = str_replace('$type', $type, $html_block_ip);
+            $table = '';
+            foreach($evidences as $evidence_str){
+                $evidence = explode("\t",trim($evidence_str));
+                $tr = str_replace('$time', $evidence[0], $html_table_row_tpl);
+                $tr = str_replace('$dst_ip', $evidence[1], $tr);
+                $tr = str_replace('$packets', $evidence[2], $tr);
+                $tr = str_replace('$bytes', $evidence[3], $tr);
+                $table =$tr."\n".$table;
+            }
+            $html_block = str_replace('$table', $table, $html_block_type);
+        }
+        $html_blocks = $html_block. "\n".$html_blocks;
+    }
+    $html = str_replace('$blocks', $html_blocks, $html_index_tpl);
+    $html = str_replace('$today', $today, $html);
+    file_put_contents($web_dir. DIRECTORY_SEPARATOR . 'index.html', $html);
+} else { //Daily db is empty
+    unset($daily);
+
+}
+
+//Load from html template 
+function load_from_template($filename){
+    $html = file_get_contents($filename);
+    return $html;
+}
+?>
