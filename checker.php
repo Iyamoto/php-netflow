@@ -19,8 +19,7 @@ else
 
 echo "[+] Reading data from $netflow_last_file\n";
 $path = $netflow_base_dir . DIRECTORY_SEPARATOR . $netflow_current_dir . DIRECTORY_SEPARATOR . $netflow_last_file;
-
-//TODO read data from json
+echo "[i] Full path to netflow $path\n";
 //Check marks, main cicle
 $suspect_counter = 0;
 foreach ($marks as $mark) {
@@ -43,7 +42,7 @@ foreach ($marks as $mark) {
     foreach ($src_datas as $src_data) {
         $src_ip = $src_data[4];
         //echo "[+] Found suspicious IP: $src_ip\n";
-        //TODO Check whitelists
+        //Check whitelists
         if (isset($whitelist[$mark]))
             if (check_whitelist($src_ip, $whitelist[$mark]))
                 continue;
