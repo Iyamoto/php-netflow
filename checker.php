@@ -37,8 +37,9 @@ foreach ($marks as $mark) {
     foreach ($src_datas as $src_data) {
         $src_ip = $src_data[4];
         //TODO Check whitelists
-        if (check_whitelist($src_ip, $whitelist))
-            continue;
+        if (isset($whitelist[$mark]))
+            if (check_whitelist($src_ip, $whitelist[$mark]))
+                continue;
         //Check DST Ips
         $filter = $mark . ' and src ip ' . $src_ip . ' and not (' . $lan_dst . ')';
         $command = $nfdump . ' -r ' . $path . ' -n 100 -s dstip/packets -o csv' . ' "' . $filter . '"';
