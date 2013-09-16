@@ -13,9 +13,6 @@ Write scripts for cron
     sample-checker.sh
     sample-reporter.sh
 
-Whitelists? 
-    Internal DNS, DC, mail servers and relays
-
 Mail template?
 What to do with similar (==IP) alarms? send every one?
 Multiple emails support

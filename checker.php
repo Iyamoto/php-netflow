@@ -10,9 +10,17 @@ require_once 'functions.php';
 echo "\n[+] Started\n";
 
 //Get netflow data
-$netflow_current_dir = '2013-09-13'; //TODO add date detection
-$netflow_last_file = 'nfcapd.201309131735'; //FIXME add last file detection 
+$netflow_current_dir = '2013-09-16'; //TODO add date detection
+//Detect last modified netflow data file
+if ($debug)
+    $netflow_last_file = 'nfcapd.201309131735';
+else {
+    $netflow_last_file = get_lastmodified_file($netflow_base_dir . DIRECTORY_SEPARATOR . $netflow_current_dir);
+    var_dump($netflow_last_file);
+}
 $path = $netflow_base_dir . DIRECTORY_SEPARATOR . $netflow_current_dir . DIRECTORY_SEPARATOR . $netflow_last_file;
+
+
 
 //TODO read data from json
 //Check marks, main cicle
@@ -33,7 +41,7 @@ foreach ($marks as $mark) {
     if (!$src_datas) {
         echo "[-] Suspicious IPs for mark: $mark not found\n";
         continue;
-    } 
+    }
     foreach ($src_datas as $src_data) {
         $src_ip = $src_data[4];
         //echo "[+] Found suspicious IP: $src_ip\n";
