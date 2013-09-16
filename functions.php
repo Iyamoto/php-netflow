@@ -77,6 +77,7 @@ function get_lastmodified_file($dir) {
     if ($handle = opendir($dir)) {
         while (false !== ($file = readdir($handle))) {
             if ($file != "." && $file != "..") {
+                var_dump($file);
                 $files[filemtime($file)] = $file;
             }
         }
