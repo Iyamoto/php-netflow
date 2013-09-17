@@ -121,7 +121,7 @@ function load_from_template($filename) {
     return $html;
 }
 
-function build_html_page($daily_file, $page_filename, $tpl_name) {
+function build_html_page($daily_file, $page_path, $page_filename, $tpl_name) {
     global $tmp_dir;
     global $tpl_dir;
     global $web_dir;
@@ -166,8 +166,9 @@ function build_html_page($daily_file, $page_filename, $tpl_name) {
         $html = str_replace('$blocks', $html_blocks, $html_index_tpl);
         $today = date_from_filename($page_filename);
         $html = str_replace('$today', $today, $html);
-        if (file_put_contents($web_dir . DIRECTORY_SEPARATOR . 'archive' . DIRECTORY_SEPARATOR . $page_filename, $html)) {
-            echo "[+] File $page_filename saved\n";
+        $where_to_write = $page_path . DIRECTORY_SEPARATOR . $page_filename;
+        if (file_put_contents($where_to_write, $html)) {
+            echo "[+] File $where_to_write saved\n";
             return true;
         }
     } else { //Daily db is empty
