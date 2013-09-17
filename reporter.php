@@ -9,6 +9,9 @@ require_once 'config.php';
 require_once 'functions.php';
 echo "\n[+] Started\n";
 
+build_html_page('daily'.$today.'.gz', 'index.html', 'index.html');
+
+/*
 $index_template_file = $tpl_dir . DIRECTORY_SEPARATOR . 'index.html';
 $block_template_file = $tpl_dir . DIRECTORY_SEPARATOR . 'block.html';
 $table_row_template_file = $tpl_dir . DIRECTORY_SEPARATOR . 'table-row.html';
@@ -53,5 +56,5 @@ if ($daily) { //Daily db exists
 } else { //Daily db is empty
     unset($daily);
 }
-
+*/
 ?>
