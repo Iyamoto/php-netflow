@@ -92,4 +92,19 @@ function get_lastmodified_file($dir) {
         return false;
 }
 
+function get_dir_list($dir) {
+    $files = array();
+    if ($handle = opendir($dir)) {
+        while (false !== ($file = readdir($handle))) {
+            if ($file != "." && $file != "..") {
+                $files[] = $file;
+            }
+        }
+        closedir($handle);
+        return $files;
+    }
+    else
+        return false;
+}
+
 ?>

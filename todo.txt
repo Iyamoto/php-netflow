@@ -11,6 +11,15 @@ Collect full info from netflow about an evil IP?
 Reporter
     Stats
     Archive
+        list of archives page
+            design - archive.html
+            generator
+        archive pages
+            get list of daily files
+            get list of archive pages
+            find diff
+            generate new archive pages
+            add links to archive list page
     More
 
 Promo
