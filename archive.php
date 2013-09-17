@@ -41,4 +41,7 @@ foreach ($daily_files as $daily_file) {
         }
     }
 }
+
+$exec_time = round(microtime(true) - $exec_time, 2);
+echo "[i] Execution time: $exec_time sec.\n";
 ?>
