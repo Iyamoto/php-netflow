@@ -18,6 +18,7 @@ Promo
     post to OSSIM forum
     add to PHP Classes
     add demo to main site
+    add list of monitored activity
 
 IDEAS
 =====
