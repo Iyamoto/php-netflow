@@ -52,9 +52,9 @@ $link_index_tpl = load_from_template($link_template_file);
 $html_links = '';
 foreach ($daily_files as $daily_file) {
     if (stristr($daily_file, 'daily')) {
-        if ($needle == $today)
-            continue;
         $date = date_from_filename($daily_file);
+        if ($date == $today)
+            continue;
         $ahref = 'archive' . $date . '.html';
         $atext = $date;
         $html_link = str_replace('$ahref', $ahref, $link_index_tpl);
