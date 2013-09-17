@@ -45,6 +45,28 @@ foreach ($daily_files as $daily_file) {
     }
 }
 
+$index_template_file = $tpl_dir . DIRECTORY_SEPARATOR . 'archive' . DIRECTORY_SEPARATOR . 'index.html';
+$link_template_file = $tpl_dir . DIRECTORY_SEPARATOR . 'archive' . DIRECTORY_SEPARATOR . 'link.html';
+$html_index_tpl = load_from_template($index_template_file);
+$link_index_tpl = load_from_template($link_template_file);
+$html_links = '';
+foreach ($daily_files as $daily_file) {
+    if (stristr($daily_file, 'daily')) {
+        $date = date_from_filename($daily_file);
+        $ahref = 'archive'.$date.'.html';
+        $atext = $date;
+        $html_link = str_replace('$ahref', $ahref, $link_index_tpl);
+        $html_link = str_replace('$atext', $atext, $html_link);
+        $html_links .= $html_link . "\n";
+    }
+}
+$html = str_replace('$links', $html_links, $html_index_tpl);
+$where_to_write = $page_path . DIRECTORY_SEPARATOR . 'index.html';
+if (file_put_contents($where_to_write, $html)) {
+    echo "[+] File $where_to_write saved\n";
+    return true;
+}
+
 $exec_time = round(microtime(true) - $exec_time, 2);
 echo "[i] Execution time: $exec_time sec.\n";
 ?>

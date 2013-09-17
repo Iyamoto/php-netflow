@@ -10,10 +10,7 @@ Collect full info from netflow about an evil IP?
 
 Reporter
     Stats
-    Archive
-        list of archives page
-            design - archive/index.html
-            add links to archive list page
+    Archive design of links
     More
 
 Promo
