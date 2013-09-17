@@ -66,7 +66,6 @@ $html = str_replace('$links', $html_links, $html_index_tpl);
 $where_to_write = $page_path . DIRECTORY_SEPARATOR . 'index.html';
 if (file_put_contents($where_to_write, $html)) {
     echo "[+] File $where_to_write saved\n";
-    return true;
 }
 
 $exec_time = round(microtime(true) - $exec_time, 2);
