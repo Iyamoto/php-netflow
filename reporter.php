@@ -54,10 +54,4 @@ if ($daily) { //Daily db exists
     unset($daily);
 }
 
-//Load from html template 
-function load_from_template($filename) {
-    $html = file_get_contents($filename);
-    return $html;
-}
-
 ?>

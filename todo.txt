@@ -12,13 +12,7 @@ Reporter
     Stats
     Archive
         list of archives page
-            design - archive.html
-            generator
-        archive pages
-            get list of daily files
-            get list of archive pages
-            find diff
-            generate new archive pages
+            design - archive/index.html
             add links to archive list page
     More
 
