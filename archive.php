@@ -15,6 +15,7 @@ if ($daily_files_size < 1)
     exit("[-] Daily files not found\n");
 $archive_files = get_dir_list($web_dir . DIRECTORY_SEPARATOR . 'archive');
 $archive_files_size = sizeof($archive_files);
+$tpl_path = 'archive' . DIRECTORY_SEPARATOR . 'archive.html';
 
 foreach ($daily_files as $daily_file) {
     if (stristr($daily_file, 'daily')) {
@@ -32,11 +33,11 @@ foreach ($daily_files as $daily_file) {
             }
             if (!$found) {
                 $do_archive[] = $daily_file;
-                build_html_page($daily_file, 'archive' . $needle . '.html', 'archive.html');
+                build_html_page($daily_file, 'archive' . $needle . '.html', $tpl_path);
             }
         } else {
             $do_archive[] = $daily_file;
-            build_html_page($daily_file, 'archive' . $needle . '.html', 'archive.html');
+            build_html_page($daily_file, 'archive' . $needle . '.html', $tpl_path);
         }
     }
 }
