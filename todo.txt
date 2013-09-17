@@ -19,6 +19,8 @@ Promo
     add to PHP Classes
     add demo to main site
     add list of monitored activity
+    add filter syntax
+    add article to habr
 
 IDEAS
 =====
