@@ -35,6 +35,7 @@ $marks[]='proto tcp and dst port 9050';//Tor
 $marks[]='proto tcp and (dst port 3128 or dst port 8118)';//Proxy
 $marks[]='proto tcp and dst port 22';//ssh scans
 $marks[]='proto tcp and dst port 23';//telnet scans
+$marks[]='proto tcp and dst port 21';//ftp
 
 $whitelist['proto icmp and icmp-type 8'][]='10.10.10.1';//White IP for first mark
 $whitelist['dst port 53'][]='10.10.10.2';//White IP for second mark
