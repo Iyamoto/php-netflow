@@ -19,6 +19,8 @@ $archive_files_size = sizeof($archive_files);
 foreach ($daily_files as $daily_file) {
     if (stristr($daily_file, 'daily')) {
         $needle = date_from_filename($daily_file);
+        if ($needle == $today)
+            continue;
         if ($archive_files_size > 0) {
             $found = false;
             foreach ($archive_files as $archive_file) {
@@ -38,5 +40,4 @@ foreach ($daily_files as $daily_file) {
         }
     }
 }
-
 ?>
