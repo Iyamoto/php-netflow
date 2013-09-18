@@ -6,7 +6,6 @@
 
 $exec_time = microtime(true);
 require_once 'config.php';
-require_once 'functions.php';
 echo "\n[+] Started\n";
 $page_path = $web_dir;
 $page_filename = 'index.html';

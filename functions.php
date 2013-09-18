@@ -165,7 +165,8 @@ function build_html_page($daily_file, $page_path, $page_filename, $tpl_name) {
         $html_blocks = preg_replace('|<hr>$|', '', $html_blocks);
         $html = str_replace('$blocks', $html_blocks, $html_index_tpl);
         $today = date_from_filename($page_filename);
-        if($today=='index') $today = date("Y-m-d");//FIXME
+        if ($today == 'index')
+            $today = date("Y-m-d"); //FIXME
         $html = str_replace('$today', $today, $html);
         $where_to_write = $page_path . DIRECTORY_SEPARATOR . $page_filename;
         if (file_put_contents($where_to_write, $html)) {
@@ -176,4 +177,20 @@ function build_html_page($daily_file, $page_path, $page_filename, $tpl_name) {
         return false;
     }
 }
+
+function recurse_copy($src, $dst) {
+    $dir = opendir($src);
+    @mkdir($dst);
+    while (false !== ( $file = readdir($dir))) {
+        if (( $file != '.' ) && ( $file != '..' )) {
+            if (is_dir($src . '/' . $file)) {
+                recurse_copy($src . '/' . $file, $dst . '/' . $file);
+            } else {
+                copy($src . '/' . $file, $dst . '/' . $file);
+            }
+        }
+    }
+    closedir($dir);
+}
+
 ?>
