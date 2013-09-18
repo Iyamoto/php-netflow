@@ -19,11 +19,13 @@ $last_daily_files = array_reverse($daily_files);
 $day_counter = 0;
 $stats_deep = 3; //days
 $ip_deep = 5;
+//Get daily db files list
 foreach ($last_daily_files as $daily_file) {
     if (stristr($daily_file, 'daily'))
         $file_names[] = $daily_file;
 }
 rsort($file_names);
+//Cycle throw last $stats_deep days
 for ($day_counter = 0; $day_counter < $stats_deep; $day_counter++) {
     echo "[+] Processing file: $file_names[$day_counter]\n";
     $daily_db_file = $tmp_dir . DIRECTORY_SEPARATOR . $file_names[$day_counter];
@@ -37,7 +39,14 @@ for ($day_counter = 0; $day_counter < $stats_deep; $day_counter++) {
             }
         }
         arsort($top_ip);
-        var_dump($top_ip);
+        $ip_counter = 0;
+        foreach ($top_ip as $tip=>$count) {
+            var_dump($tip);
+            $ip_counter++;
+            if ($ip_counter >= $ip_deep)
+                break;
+        }
+
         unset($top_ip);
     }
 }
