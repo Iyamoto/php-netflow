@@ -69,7 +69,8 @@ for ($day_counter = 0; $day_counter < $stats_deep; $day_counter++) {
 
         unset($top_ip);
     }
-    $html_blocks = $html_block . "\n" . $html_blocks;
+    //$html_blocks = $html_block . "\n" . $html_blocks;
+    $html_blocks .= $html_block . "\n";
 }
 
 $html_blocks = preg_replace('|<hr>$|', '', $html_blocks);

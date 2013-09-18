@@ -11,7 +11,6 @@ Collect full info from netflow about an evil IP?
 
 Reporter
     Stats
-        Most Active IPs for last 3 days?
         Daily bots
     More, nmap, mac?
     Main template? - kiss
