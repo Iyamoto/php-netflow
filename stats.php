@@ -42,6 +42,11 @@ for ($day_counter = 0; $day_counter < $stats_deep; $day_counter++) {
         $ip_counter = 0;
         foreach ($top_ip as $tip=>$count) {
             var_dump($tip);
+            foreach($daily[$tip] as $types=>$evidences){
+                var_dump($types);
+                $activity = sizeof($evidences);
+                var_dump($activity);
+            }
             $ip_counter++;
             if ($ip_counter >= $ip_deep)
                 break;
