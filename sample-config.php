@@ -3,22 +3,32 @@
 /*
  * Example config file for PHP-NetFlow
  * Rename to config.php
+ * Must be edit variables:
+ *  $emails
+ *  $netflow_base_dir
  * Tuned for usage with OSSIM
  */
 
-//$emails and $netflow_base_dir must be set 
+//Install section, edit $emails and profile_id in $netflow_base_dir
 $emails[] = 'name@domain.zone';//Whom to report
 $netflow_base_dir = '/var/cache/nfdump/flows/live/profile_id';//Where to look for netflow data
-$web_dir = '/var/www/botolovka';
-$tmp_dir = '/tmp/phpnetflow';
-$tpl_dir = 'ru-tpl';
+$nfdump = '/usr/bin/nfdump';//which nfdump
+$tmp_dir = '/tmp/phpnetflow';//Where to keep phpnetflow data files
+$web_dir = '/var/www/bothunter';//Where to place html reports
+$tpl_dir = 'eng-tpl';//Name of a web template
+//End of install section
+
 $today = date("Y-m-d");
 if (!is_dir($tmp_dir))
     mkdir($tmp_dir);
+if (!is_dir($web_dir))
+    mkdir($web_dir);
+if (!is_dir($web_dir. DIRECTORY_SEPARATOR . 'archive'))
+    mkdir($web_dir. DIRECTORY_SEPARATOR . 'archive');
 $db_file = $tmp_dir . DIRECTORY_SEPARATOR . 'onerun.gz';
 $daily_db_file = $tmp_dir . DIRECTORY_SEPARATOR . 'daily'.$today.'.gz';
-$nfdump = '/usr/bin/nfdump';//which nfdump
 
+//TODO copy css, js files to $web_dir
 
 //NFDump filters
 $lan_src = 'src net 10.0/8 or src net 192.168/16';
@@ -68,8 +78,8 @@ $whitelist['proto icmp and icmp-type 8'][]='10.10.10.1';//White IP for first mar
 $whitelist['dst port 53'][]='10.10.10.2';//White IP for second mark
 //TODO add netmask support for whitelist
 
-$num = 10;//Define number of top N
-$dst_ip_lvl = 5;//Action lvl for dst IPs
+$num = 10;//Define number of top N for ntpdump
+$dst_ip_lvl = 2;//Action and report lvl for dst IPs
 
 $debug = false;
 
