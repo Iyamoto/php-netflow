@@ -17,17 +17,30 @@ $page_path = $web_dir . DIRECTORY_SEPARATOR . 'stats';
 
 $last_daily_files = array_reverse($daily_files);
 $day_counter = 0;
-$stats_deep = 3;//days
+$stats_deep = 3; //days
+$ip_deep = 5;
 foreach ($last_daily_files as $daily_file) {
-    if (stristr($daily_file, 'daily')) {
+    if (stristr($daily_file, 'daily'))
         $file_names[] = $daily_file;
-        //var_dump($daily_file);
-        //$day_counter++;
-        //if($day_counter>=$stats_deep) break;
-    }
 }
 rsort($file_names);
-var_dump($file_names);
+for ($day_counter = 0; $day_counter < $stats_deep; $day_counter++) {
+    echo "[+] Processing file: $file_names[$day_counter]\n";
+    $daily_db_file = $tmp_dir . DIRECTORY_SEPARATOR . $file_names[$day_counter];
+    $daily = read_db_from_file($daily_db_file);
+    if ($daily) { //Daily db exists
+        $daily_size = sizeof($daily);
+        echo "[+] Read $daily_size daily blocks\n";
+        foreach ($daily as $ip => $types) {
+            foreach ($types as $type => $evidences) {
+                $top_ip[$ip] = sizeof($evidences);
+            }
+        }
+        arsort($top_ip);
+        var_dump($top_ip);
+        unset($top_ip);
+    }
+}
 
 $exec_time = round(microtime(true) - $exec_time, 2);
 echo "[i] Execution time: $exec_time sec.\n";
