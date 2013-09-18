@@ -39,6 +39,9 @@ for ($day_counter = 0; $day_counter < $stats_deep; $day_counter++) {
     echo "[+] Processing file: $file_names[$day_counter]\n";
     $day = date_from_filename($file_names[$day_counter]);
     $html_block_day = str_replace('$day', $day, $html_block_tpl);
+    if($day_counter==0) $archlink = '../index.html';
+    else $archlink = '../archive/archive'.$day.'.html';
+    $html_block_day = str_replace('$archlink', $archlink, $html_block_day);
 
     $daily_db_file = $tmp_dir . DIRECTORY_SEPARATOR . $file_names[$day_counter];
     $daily = read_db_from_file($daily_db_file);
