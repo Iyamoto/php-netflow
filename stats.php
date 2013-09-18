@@ -20,12 +20,14 @@ $day_counter = 0;
 $stats_deep = 3;//days
 foreach ($last_daily_files as $daily_file) {
     if (stristr($daily_file, 'daily')) {
-        $needle = date_from_filename($daily_file);
-        var_dump($daily_file);
-        $day_counter++;
-        if($day_counter>=$stats_deep) break;
+        $file_names[] = $daily_file;
+        //var_dump($daily_file);
+        //$day_counter++;
+        //if($day_counter>=$stats_deep) break;
     }
 }
+rsort($file_names);
+var_dump($file_names);
 
 $exec_time = round(microtime(true) - $exec_time, 2);
 echo "[i] Execution time: $exec_time sec.\n";
