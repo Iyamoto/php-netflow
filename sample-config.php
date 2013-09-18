@@ -32,6 +32,7 @@ if (!is_dir($tmp_dir))
 if (!is_dir($web_dir)) {
     mkdir($web_dir);
     mkdir($web_dir . DIRECTORY_SEPARATOR . 'archive');
+    mkdir($web_dir . DIRECTORY_SEPARATOR . 'stats');
     copy('botolovka' . DIRECTORY_SEPARATOR . 'starter-template.css', $web_dir . DIRECTORY_SEPARATOR . 'starter-template.css');
     recurse_copy('botolovka' . DIRECTORY_SEPARATOR . 'assets', $web_dir . DIRECTORY_SEPARATOR . 'assets');
     recurse_copy('botolovka' . DIRECTORY_SEPARATOR . 'dist', $web_dir . DIRECTORY_SEPARATOR . 'dist');

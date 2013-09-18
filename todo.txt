@@ -1,20 +1,23 @@
 TODO
 ====
 
-Wraper function for html replace
 Detect local scans 1 to network and 1 nmap other
 
 Collect full info from netflow about an evil IP?
+    more.php?ip=8.8.8.8
     protocols
     dst ports
     src ports
 
 Reporter
     Stats
-    Archive design of list page
-    More
-    Add "to mark" option to IP panel and Marked lists
-    Add to white list button?
+        Most Active IPs for last 2 days?
+        Daily bots
+    More, nmap, mac?
+    Main template? - kiss
+    Archive design of list page - kiss
+    Add "to mark" option to IP panel and Marked lists - kiss
+    Add to white list button? - kiss
 
 Promo
     add filter syntax and link it

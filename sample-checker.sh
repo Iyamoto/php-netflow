@@ -10,6 +10,7 @@ date > lastrun.log
 /usr/bin/php checker.php >> lastrun.log
 /usr/bin/php filter.php >> lastrun.log
 /usr/bin/php reporter.php >> lastrun.log
+/usr/bin/php stats.php >> lastrun.log
 
 archivedate=`stat -c%y $archiveindex | gawk '{ print $1 }'`
 today=`date +%Y-%m-%d`
