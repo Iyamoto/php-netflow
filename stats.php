@@ -15,10 +15,15 @@ if ($daily_files_size < 1)
 $tpl_path = 'stats' . DIRECTORY_SEPARATOR . 'index.html';
 $page_path = $web_dir . DIRECTORY_SEPARATOR . 'stats';
 
-foreach ($daily_files as $daily_file) {
+$last_daily_files = array_reverse($daily_files);
+$day_counter = 0;
+$stats_deep = 3;//days
+foreach ($last_daily_files as $daily_file) {
     if (stristr($daily_file, 'daily')) {
         $needle = date_from_filename($daily_file);
-        var_dump($needle);
+        var_dump($daily_file);
+        $day_counter++;
+        if($day_counter>=$stats_deep) break;
     }
 }
 
