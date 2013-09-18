@@ -18,9 +18,15 @@ $web_dir = '/var/www/bothunter'; //Where to place html reports
 $tpl_dir = 'eng-tpl'; //Name of a web template
 //End of install section
 
+//White list
+//Put your DNS server, Proxy etc here
+$whitelist['proto icmp and icmp-type 8'][] = '10.10.10.1'; 
+$whitelist['dst port 53'][] = '10.10.10.2'; 
+//TODO add netmask support for the whitelist
+
 require_once 'functions.php';
 
-//Build directory structure if needed
+//Build directory structure if needed and copy twitter bootstrap files to $web_dir
 if (!is_dir($tmp_dir))
     mkdir($tmp_dir);
 if (!is_dir($web_dir)) {
@@ -36,7 +42,6 @@ $today = date("Y-m-d");
 $db_file = $tmp_dir . DIRECTORY_SEPARATOR . 'onerun.gz';
 $daily_db_file = $tmp_dir . DIRECTORY_SEPARATOR . 'daily' . $today . '.gz';
 
-//TODO copy css, js files to $web_dir
 //NFDump filters for LAN
 $lan_src = 'src net 10.0/8 or src net 192.168/16';
 $lan_dst = 'dst net 10.0/8 or dst net 192.168/16 or dst net 169.254/16';
@@ -80,10 +85,6 @@ $marks[] = 'proto tcp and dst port 2745'; //backdoor of Bagle worm
 $marks[] = 'proto tcp and dst port 3127'; //backdoor of MyDoom worm
 $marks[] = 'proto tcp and dst port 5000'; //upnp (Universal Plug and Play: MS01-059)
 $marks[] = 'proto tcp and dst port 6129'; //dameware (Dameware Remote Admin)
-
-$whitelist['proto icmp and icmp-type 8'][] = '10.10.10.1'; //White IP for first mark
-$whitelist['dst port 53'][] = '10.10.10.2'; //White IP for second mark
-//TODO add netmask support for the whitelist
 
 $num = 10; //Define number of top N for ntpdump
 $dst_ip_lvl = 2; //Action and report lvl for dst IPs

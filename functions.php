@@ -6,7 +6,7 @@
 mb_internal_encoding("UTF-8");
 
 function action($emails, $src_ip, $type, $evidence) {
-    $subject = "Detected evil IP: $src_ip";
+    $subject = "Detected suspicious IP: $src_ip";
     $text = implode("\n", $evidence);
     $body = $type . "\n" . $text;
     foreach ($emails as $email) {
