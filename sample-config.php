@@ -46,6 +46,7 @@ $daily_db_file = $tmp_dir . DIRECTORY_SEPARATOR . 'daily' . $today . '.gz';
 //NFDump filters for LAN
 $lan_src = 'src net 10.0/8 or src net 192.168/16';
 $lan_dst = 'dst net 10.0/8 or dst net 192.168/16 or dst net 169.254/16';
+$lan_dst2 = 'dst net 10.0/8 or dst net 192.168/16';
 
 //What are we looking for?
 //https://isc.sans.edu/trends.html
@@ -89,7 +90,8 @@ $marks[] = 'proto tcp and dst port 5000'; //upnp (Universal Plug and Play: MS01-
 $marks[] = 'proto tcp and dst port 6129'; //dameware (Dameware Remote Admin)
 
 $num = 10; //Define number of top N for ntpdump
-$dst_ip_lvl = 2; //Action and report lvl for dst IPs
+$dst_ip_lvl = 2; //Action and report lvl for WAN DST IPs
+$dst_ip_lvl2 = 5; //Action and report lvl for LAN DST IPs
 
 $debug = false;
 

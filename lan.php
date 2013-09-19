@@ -3,7 +3,7 @@
 /*
  * NetFlow anomaly detector
  * Finds evil activity in LAN
- * Focus on LAN to WAN activity
+ * Focus on LAN to LAN activity
  */
 $exec_time = microtime(true);
 require_once 'config.php';
@@ -25,7 +25,7 @@ $suspect_counter = 0;
 foreach ($marks as $mark) {
     //Form filter
     echo "[+] Looking for $mark traffic\n";
-    $filter = $mark . ' and (' . $lan_src . ') and not (' . $lan_dst . ')';
+    $filter = $mark . ' and (' . $lan_src . ') and (' . $lan_dst2 . ')';
     //Form nfdump command, sort order: packets
     $command = $nfdump . ' -r ' . $path . ' -n ' . $num . ' -s srcip/packets -o csv' . ' "' . $filter . '"';
     if ($debug) { //gets results from test string, not from nfdump
@@ -47,7 +47,7 @@ foreach ($marks as $mark) {
             if (check_whitelist($src_ip, $whitelist[$mark]))
                 continue;
         //Check DST Ips
-        $filter = $mark . ' and src ip ' . $src_ip . ' and not (' . $lan_dst . ')';
+        $filter = $mark . ' and src ip ' . $src_ip . ' and (' . $lan_dst2 . ')';
         $command = $nfdump . ' -r ' . $path . ' -n 100 -s dstip/packets -o csv' . ' "' . $filter . '"';
         if ($debug) {
             $results = $test_results2;
@@ -86,8 +86,8 @@ foreach ($marks as $mark) {
 }
 
 //Save suspects to json
-if (save_json($db_file, $one_run))
-    echo "[+] Saved\n";
+//if (save_json($db_file, $one_run))
+//    echo "[+] Saved\n";
 
 $exec_time = round(microtime(true) - $exec_time, 2);
 echo "[i] Execution time: $exec_time sec.\n";
