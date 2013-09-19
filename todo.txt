@@ -1,7 +1,7 @@
 TODO
 ====
 
-Detect local scans 1 to network and 1 nmap other
+Detect local scans 1 nmap other
 
 Collect full info from netflow about an evil IP?
     more.php?ip=8.8.8.8
