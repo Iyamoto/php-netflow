@@ -14,7 +14,7 @@ if ($one_run) {
     echo "[+] Read $one_run_size blocks from $db_file\n";
 }
 else
-    exit('Problem with one_run file');
+    exit("[-] Problem with one_run file\n");
 
 //Read daily data
 $daily = read_db_from_file($daily_db_file);
