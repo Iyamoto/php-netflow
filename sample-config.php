@@ -93,8 +93,8 @@ $marks[] = 'proto tcp and dst port 5000'; //upnp (Universal Plug and Play: MS01-
 $marks[] = 'proto tcp and dst port 6129'; //dameware (Dameware Remote Admin)
 
 $num = 10; //Define number of top N for ntpdump
-$dst_ip_lvl = 2; //Action and report lvl for WAN DST IPs
-$dst_ip_lvl2 = 5; //Action and report lvl for LAN DST IPs
+$dst_ip_lvl = 3; //Action and report lvl for WAN DST IPs
+$dst_ip_lvl2 = 10; //Action and report lvl for LAN DST IPs
 
 $debug = false;
 
