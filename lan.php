@@ -43,8 +43,8 @@ foreach ($marks as $mark) {
         $src_ip = $src_data[4];
         //echo "[+] Found suspicious IP: $src_ip\n";
         //Check whitelists
-        if (isset($whitelist[$mark]))
-            if (check_whitelist($src_ip, $whitelist[$mark]))
+        if (isset($whitelist2[$mark]))
+            if (check_whitelist($src_ip, $whitelist2[$mark]))
                 continue;
         //Check DST Ips
         $filter = $mark . ' and src ip ' . $src_ip . ' and (' . $lan_dst2 . ')';
@@ -61,7 +61,7 @@ foreach ($marks as $mark) {
             continue;
         }
         $dst_ip_count = sizeof($dst_datas);
-        if ($dst_ip_count >= $dst_ip_lvl) {
+        if ($dst_ip_count >= $dst_ip_lvl2) {
             echo "[+] Found suspicious IP: $src_ip\n";
             echo "[+] Destination IP stats\n";
             echo "[+] TIME\t\tIP\tPackets\tBytes\n";

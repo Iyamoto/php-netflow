@@ -20,8 +20,11 @@ $tpl_dir = 'eng-tpl'; //Name of a web template
 
 //White list
 //Put your DNS server, Proxy etc here
+//White list for LAN to WAN hosts
 $whitelist['proto icmp and icmp-type 8'][] = '10.10.10.1'; 
 $whitelist['dst port 53'][] = '10.10.10.2'; 
+//White list for LAN to LAN hosts
+$whitelist2['dst port 53'][] = '10.10.10.2'; 
 //TODO add netmask support for the whitelist
 
 require_once 'functions.php';
