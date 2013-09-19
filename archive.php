@@ -49,6 +49,7 @@ $link_template_file = $tpl_dir . DIRECTORY_SEPARATOR . 'archive' . DIRECTORY_SEP
 $html_index_tpl = load_from_template($index_template_file);
 $link_index_tpl = load_from_template($link_template_file);
 $html_links = '';
+arsort($daily_files);
 foreach ($daily_files as $daily_file) {
     if (stristr($daily_file, 'daily')) {
         $date = date_from_filename($daily_file);
