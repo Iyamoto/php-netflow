@@ -12,6 +12,7 @@ Collect full info from netflow about an evil IP?
 Reporter
     Stats
         Daily bots
+        Most active networks
     More, nmap, mac?
     Main template? - kiss
     Archive design of list page - kiss
