@@ -25,7 +25,7 @@ function build_html_page($daily_file, $ip) {
     global $tpl_dir;
     $daily_db_file = $tmp_dir . DIRECTORY_SEPARATOR . $daily_file;
     $index_template_file = $tpl_dir . DIRECTORY_SEPARATOR . 'more.html';
-    $block_template_file = $tpl_dir . DIRECTORY_SEPARATOR . 'more-block.html';
+    $block_template_file = $tpl_dir . DIRECTORY_SEPARATOR . 'more-blocks.html';
     $table_row_template_file = $tpl_dir . DIRECTORY_SEPARATOR . 'table-row.html';
     //Read daily data
     $daily = read_db_from_file($daily_db_file);
