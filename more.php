@@ -49,7 +49,8 @@ function build_html_page($daily, $ip) {
             $html_block_type = str_replace('$type', $type, $html_block_tpl);
             $table = '';
             $evidence_counter = 0;
-            $evidences_reverse = array_reverse($evidences);
+            //$evidences_reverse = array_reverse($evidences);
+            $evidences_reverse = $evidences;
             foreach ($evidences_reverse as $evidence_str) {
                 $evidence = explode("\t", trim($evidence_str));
                 $tr = str_replace('$time', $evidence[0], $html_table_row_tpl);
