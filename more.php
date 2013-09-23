@@ -17,17 +17,17 @@ foreach ($daily_files as $daily_file) {
 }
 rsort($file_names);
 
-$html = build_html_page($file_names[0], 'index.html');
+$html = build_html_page($file_names[0], $ip);
 echo $html;
 
 $exec_time = round(microtime(true) - $exec_time, 2);
 echo "[i] Execution time: $exec_time sec.<br>";
 
-function build_html_page($daily_file, $tpl_name) {
+function build_html_page($daily_file, $ip) {
     global $tmp_dir;
     global $tpl_dir;
     $daily_db_file = $tmp_dir . DIRECTORY_SEPARATOR . $daily_file;
-    $index_template_file = $tpl_dir . DIRECTORY_SEPARATOR . $tpl_name;
+    $index_template_file = $tpl_dir . DIRECTORY_SEPARATOR . 'index.html';
     $block_template_file = $tpl_dir . DIRECTORY_SEPARATOR . 'block.html';
     $table_row_template_file = $tpl_dir . DIRECTORY_SEPARATOR . 'table-row.html';
     //Read daily data
@@ -38,7 +38,7 @@ function build_html_page($daily_file, $tpl_name) {
         $html_block_tpl = load_from_template($block_template_file);
         $html_table_row_tpl = load_from_template($table_row_template_file);
         $html_blocks = '';
-        foreach ($daily as $ip => $types) {
+        foreach ($daily[$ip] as $types) {
             $html_block_ip = str_replace('$ip', $ip, $html_block_tpl);
             foreach ($types as $type => $evidences) {
                 $html_block_type = str_replace('$type', $type, $html_block_ip);
@@ -54,7 +54,7 @@ function build_html_page($daily_file, $tpl_name) {
                     //$table = $tr . "\n" . $table;
                     $table .= $tr . "\n";
                     $evidence_counter++;
-                    if ($evidence_counter > 9)
+                    if ($evidence_counter > 100)
                         break;
                 }
 
