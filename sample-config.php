@@ -38,6 +38,7 @@ if (!is_dir($web_dir)) {
     copy('botolovka' . DIRECTORY_SEPARATOR . 'starter-template.css', $web_dir . DIRECTORY_SEPARATOR . 'starter-template.css');
     recurse_copy('botolovka' . DIRECTORY_SEPARATOR . 'assets', $web_dir . DIRECTORY_SEPARATOR . 'assets');
     recurse_copy('botolovka' . DIRECTORY_SEPARATOR . 'dist', $web_dir . DIRECTORY_SEPARATOR . 'dist');
+    recurse_copy($tpl_dir, $web_dir . DIRECTORY_SEPARATOR . $tpl_dir);
     copy('more.php',$web_dir . DIRECTORY_SEPARATOR . 'more.php');
 }
 

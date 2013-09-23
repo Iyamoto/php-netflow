@@ -34,13 +34,11 @@ function build_html_page($daily_file, $tpl_name) {
     $daily = read_db_from_file($daily_db_file);
     if ($daily) { //Daily db exists
         $daily_size = sizeof($daily);
-        echo "[+] Read $daily_size daily blocks\n";
         $html_index_tpl = load_from_template($index_template_file);
         $html_block_tpl = load_from_template($block_template_file);
         $html_table_row_tpl = load_from_template($table_row_template_file);
         $html_blocks = '';
         foreach ($daily as $ip => $types) {
-            echo "$ip<br>";
             $html_block_ip = str_replace('$ip', $ip, $html_block_tpl);
             foreach ($types as $type => $evidences) {
                 $html_block_type = str_replace('$type', $type, $html_block_ip);
@@ -56,7 +54,6 @@ function build_html_page($daily_file, $tpl_name) {
                     //$table = $tr . "\n" . $table;
                     $table .= $tr . "\n";
                     $evidence_counter++;
-                    echo "$evidence_counter<br>";
                     if ($evidence_counter > 9)
                         break;
                 }
