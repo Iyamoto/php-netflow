@@ -36,7 +36,6 @@ function build_html_page($daily_file, $tpl_name) {
     $daily = read_db_from_file($daily_db_file);
     if ($daily) { //Daily db exists
         $daily_size = sizeof($daily);
-        echo "[+] Read $daily_size daily blocks\n";
         $html_index_tpl = load_from_template($index_template_file);
         $html_block_tpl = load_from_template($block_template_file);
         $html_table_row_tpl = load_from_template($table_row_template_file);
@@ -120,5 +119,13 @@ function load_json($fn) {
         echo "[-] Cant load file $fn\n";
         return false;
     }
+}
+
+function date_from_filename($filename) {//TODO put regex here
+    $needle = str_replace('daily', '', $filename);
+    $needle = str_replace('archive', '', $needle);
+    $needle = str_replace('.html', '', $needle);
+    $needle = str_replace('.gz', '', $needle);
+    return $needle;
 }
 ?>
