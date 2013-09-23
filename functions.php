@@ -127,7 +127,10 @@ function build_html_page($daily_file, $page_path, $page_filename, $tpl_name) {
     global $web_dir;
     $daily_db_file = $tmp_dir . DIRECTORY_SEPARATOR . $daily_file;
     $index_template_file = $tpl_dir . DIRECTORY_SEPARATOR . $tpl_name;
-    $block_template_file = $tpl_dir . DIRECTORY_SEPARATOR . 'block.html';
+    if (stristr($tpl_name, 'archive'))
+        $block_template_file = $tpl_dir . DIRECTORY_SEPARATOR . 'archive'.DIRECTORY_SEPARATOR.'block.html';
+    else
+        $block_template_file = $tpl_dir . DIRECTORY_SEPARATOR . 'block.html';
     $table_row_template_file = $tpl_dir . DIRECTORY_SEPARATOR . 'table-row.html';
     //Read daily data
     $daily = read_db_from_file($daily_db_file);
