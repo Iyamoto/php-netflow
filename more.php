@@ -7,8 +7,6 @@ $exec_time = microtime(true);
 $tmp_dir = 'db';
 $tpl_dir = 'ru-tpl';
 $ip = htmlentities($_GET['ip'], ENT_QUOTES, 'UTF-8');
-
-echo $ip . '<br>';
 $daily_files = get_dir_list($tmp_dir);
 $daily_files_size = sizeof($daily_files);
 if ($daily_files_size < 1)
@@ -66,10 +64,6 @@ function build_html_page($daily_file, $tpl_name) {
         }
         $html_blocks = preg_replace('|<hr>$|', '', $html_blocks);
         $html = str_replace('$blocks', $html_blocks, $html_index_tpl);
-        $today = date_from_filename($page_filename);
-        if ($today == 'index')
-            $today = date("Y-m-d"); //FIXME
-        $html = str_replace('$today', $today, $html);
         return $html;
     } else { //Daily db is empty
         return false;
@@ -119,13 +113,5 @@ function load_json($fn) {
         echo "[-] Cant load file $fn\n";
         return false;
     }
-}
-
-function date_from_filename($filename) {//TODO put regex here
-    $needle = str_replace('daily', '', $filename);
-    $needle = str_replace('archive', '', $needle);
-    $needle = str_replace('.html', '', $needle);
-    $needle = str_replace('.gz', '', $needle);
-    return $needle;
 }
 ?>
