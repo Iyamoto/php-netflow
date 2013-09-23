@@ -7,7 +7,7 @@ $exec_time = microtime(true);
 echo "\n[+] Started\n";
 
 $ip = htmlentities($_GET['ip'], ENT_QUOTES, 'UTF-8');
-$last_daily = get_lastmodified_file('tmp');
+$last_daily = get_lastmodified_file('db');
 echo $ip;
 var_dump($last_daily);
 

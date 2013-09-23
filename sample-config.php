@@ -13,7 +13,6 @@
 $emails[] = 'name@domain.zone'; //Whom to report
 $netflow_base_dir = '/var/cache/nfdump/flows/live/profile_id'; //Where to look for netflow data
 $nfdump = '/usr/bin/nfdump'; //which nfdump
-$tmp_dir = '/var/www/bothunter/tmp'; //Where to keep phpnetflow data files
 $web_dir = '/var/www/bothunter'; //Where to place html reports
 $tpl_dir = 'eng-tpl'; //Name of a web template
 //End of install section
@@ -35,12 +34,14 @@ if (!is_dir($web_dir)) {
     mkdir($web_dir);
     mkdir($web_dir . DIRECTORY_SEPARATOR . 'archive');
     mkdir($web_dir . DIRECTORY_SEPARATOR . 'stats');
+    mkdir($web_dir . DIRECTORY_SEPARATOR . 'db');
     copy('botolovka' . DIRECTORY_SEPARATOR . 'starter-template.css', $web_dir . DIRECTORY_SEPARATOR . 'starter-template.css');
     recurse_copy('botolovka' . DIRECTORY_SEPARATOR . 'assets', $web_dir . DIRECTORY_SEPARATOR . 'assets');
     recurse_copy('botolovka' . DIRECTORY_SEPARATOR . 'dist', $web_dir . DIRECTORY_SEPARATOR . 'dist');
     copy('more.php',$web_dir . DIRECTORY_SEPARATOR . 'more.php');
 }
 
+$tmp_dir = $web_dir . DIRECTORY_SEPARATOR . 'db'; //Where to keep phpnetflow data files
 if (!is_dir($tmp_dir))
     mkdir($tmp_dir);
 
