@@ -1,26 +1,16 @@
 TODO
 ====
-
-Detect local scans 1 nmap other
-
-Collect full info from netflow about an evil IP?
-    more.php?ip=8.8.8.8
-$ip = htmlentities($_GET['ip'], ENT_QUOTES, 'UTF-8');
-    protocols
-    dst ports
-    src ports
-
 Reporter
     Stats
         Daily bots
         Most active networks
-    More, nmap, mac?
     Main template? - kiss
     Archive design of list page - kiss
     Add "to mark" option to IP panel and Marked lists - kiss
     Add to white list button? - kiss
 
 Promo
+    clear and comment the code
     add filter syntax and link it
     fix phpnetflow.com design - git clone
     add list of traffic types and link to the list from main page
