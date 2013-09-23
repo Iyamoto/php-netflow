@@ -13,7 +13,7 @@
 $emails[] = 'name@domain.zone'; //Whom to report
 $netflow_base_dir = '/var/cache/nfdump/flows/live/profile_id'; //Where to look for netflow data
 $nfdump = '/usr/bin/nfdump'; //which nfdump
-$tmp_dir = '/tmp/phpnetflow'; //Where to keep phpnetflow data files
+$tmp_dir = '/var/www/bothunter/tmp'; //Where to keep phpnetflow data files
 $web_dir = '/var/www/bothunter'; //Where to place html reports
 $tpl_dir = 'eng-tpl'; //Name of a web template
 //End of install section
@@ -30,8 +30,7 @@ $whitelist2['dst port 53'][] = '10.10.10.2';
 require_once 'functions.php';
 
 //Build directory structure if needed and copy twitter bootstrap files to $web_dir
-if (!is_dir($tmp_dir))
-    mkdir($tmp_dir);
+
 if (!is_dir($web_dir)) {
     mkdir($web_dir);
     mkdir($web_dir . DIRECTORY_SEPARATOR . 'archive');
@@ -39,7 +38,11 @@ if (!is_dir($web_dir)) {
     copy('botolovka' . DIRECTORY_SEPARATOR . 'starter-template.css', $web_dir . DIRECTORY_SEPARATOR . 'starter-template.css');
     recurse_copy('botolovka' . DIRECTORY_SEPARATOR . 'assets', $web_dir . DIRECTORY_SEPARATOR . 'assets');
     recurse_copy('botolovka' . DIRECTORY_SEPARATOR . 'dist', $web_dir . DIRECTORY_SEPARATOR . 'dist');
+    copy('more.php',$web_dir . DIRECTORY_SEPARATOR . 'more.php');
 }
+
+if (!is_dir($tmp_dir))
+    mkdir($tmp_dir);
 
 //Init variables
 $today = date("Y-m-d");
