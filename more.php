@@ -4,28 +4,38 @@
  *   More info about an IP
  */
 $exec_time = microtime(true);
-echo "\n[+] Started\n";
+echo "<br>[+] Started<br>";
 
 $ip = htmlentities($_GET['ip'], ENT_QUOTES, 'UTF-8');
-$last_daily = get_lastmodified_file('db');
-echo $ip;
-var_dump($last_daily);
+
+echo $ip.'<br>';
+$daily_files = get_dir_list('db');
+$daily_files_size = sizeof($daily_files);
+if ($daily_files_size < 1)
+    exit("[-] Daily files not found<br>");
+foreach ($daily_files as $daily_file) {
+    if (stristr($daily_file, 'daily'))
+        $file_names[] = $daily_file;
+}
+rsort($file_names);
+
+var_dump($file_names[0]);
 
 $exec_time = round(microtime(true) - $exec_time, 2);
-echo "[i] Execution time: $exec_time sec.\n";
+echo "[i] Execution time: $exec_time sec.<br>";
 
-function get_lastmodified_file($dir) {
+
+
+function get_dir_list($dir) {
     $files = array();
     if ($handle = opendir($dir)) {
         while (false !== ($file = readdir($handle))) {
             if ($file != "." && $file != "..") {
-                $files[filemtime($dir . DIRECTORY_SEPARATOR . $file)] = $file;
+                $files[] = $file;
             }
         }
         closedir($handle);
-        ksort($files);
-        $reallyLastModified = end($files);
-        return $reallyLastModified;
+        return $files;
     }
     else
         return false;
