@@ -5,11 +5,11 @@
  */
 $exec_time = microtime(true);
 echo "<br>[+] Started<br>";
-
+$tmp_dir = 'db';
 $ip = htmlentities($_GET['ip'], ENT_QUOTES, 'UTF-8');
 
 echo $ip . '<br>';
-$daily_files = get_dir_list('db');
+$daily_files = get_dir_list($tmp_dir);
 $daily_files_size = sizeof($daily_files);
 if ($daily_files_size < 1)
     exit("[-] Daily files not found<br>");
@@ -18,7 +18,7 @@ foreach ($daily_files as $daily_file) {
         $file_names[] = $daily_file;
 }
 rsort($file_names);
-$daily = read_db_from_file($file_names[0]);
+$daily = read_db_from_file($tmp_dir. DIRECTORY_SEPARATOR .$file_names[0]);
 if ($daily) { //Daily db exists
     $daily_size = sizeof($daily);
     echo "[+] Read $daily_size daily blocks<br>";
