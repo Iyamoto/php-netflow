@@ -17,18 +17,28 @@ foreach ($daily_files as $daily_file) {
 }
 rsort($file_names);
 
-$html = build_html_page($file_names[0], $ip);
+foreach ($file_names as $daily_file) {
+    $daily_db_file = $tmp_dir . DIRECTORY_SEPARATOR . $daily_file;
+    $daily = read_db_from_file($daily_db_file);
+    if ($daily) { //Daily db exists
+        if (isset($daily[$ip])) {//IP is in the db
+            foreach ($daily[$ip] as $type => $evidences) {
+                foreach ($evidences as $evidence) {
+                    $global[$ip][$type][] = $evidence;
+                }
+            }
+        }
+    }
+}
+
+$html = build_html_page($global, $ip);
 echo $html;
 
-function build_html_page($daily_file, $ip) {
-    global $tmp_dir;
+function build_html_page($daily, $ip) {
     global $tpl_dir;
-    $daily_db_file = $tmp_dir . DIRECTORY_SEPARATOR . $daily_file;
     $index_template_file = $tpl_dir . DIRECTORY_SEPARATOR . 'more.html';
     $block_template_file = $tpl_dir . DIRECTORY_SEPARATOR . 'more-blocks.html';
     $table_row_template_file = $tpl_dir . DIRECTORY_SEPARATOR . 'table-row.html';
-    //Read daily data
-    $daily = read_db_from_file($daily_db_file);
     if ($daily) { //Daily db exists
         $daily_size = sizeof($daily);
         $html_index_tpl = load_from_template($index_template_file);
