@@ -49,21 +49,17 @@ function build_html_page($daily, $ip) {
             $html_block_type = str_replace('$type', $type, $html_block_tpl);
             $table = '';
             $evidence_counter = 0;
-            //$evidences_reverse = array_reverse($evidences);
-            $evidences_reverse = $evidences;
-            foreach ($evidences_reverse as $evidence_str) {
+            foreach ($evidences as $evidence_str) {
                 $evidence = explode("\t", trim($evidence_str));
                 $tr = str_replace('$time', $evidence[0], $html_table_row_tpl);
                 $tr = str_replace('$dst_ip', $evidence[1], $tr);
                 $tr = str_replace('$packets', $evidence[2], $tr);
                 $tr = str_replace('$bytes', $evidence[3], $tr);
-                //$table = $tr . "\n" . $table;
                 $table .= $tr . "\n";
                 $evidence_counter++;
                 if ($evidence_counter > 100)
                     break;
             }
-
             $html_block = str_replace('$table', $table, $html_block_type);
             $html_blocks = $html_block . "\n" . $html_blocks;
         }
