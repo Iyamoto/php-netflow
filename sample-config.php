@@ -14,7 +14,7 @@ $emails[] = 'name@domain.zone'; //Whom to report
 $netflow_base_dir = '/var/cache/nfdump/flows/live/profile_id'; //Where to look for netflow data
 $nfdump = '/usr/bin/nfdump'; //which nfdump
 $web_dir = '/var/www/bothunter'; //Where to place html reports
-$tpl_dir = 'eng-tpl'; //Name of a web template
+$tpl_dir = 'ru-tpl'; //Name of a web template
 //End of install section
 
 //White list

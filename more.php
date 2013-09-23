@@ -17,6 +17,7 @@ foreach ($daily_files as $daily_file) {
 }
 rsort($file_names);
 
+$days_counter = 0;
 foreach ($file_names as $daily_file) {
     $daily_db_file = $tmp_dir . DIRECTORY_SEPARATOR . $daily_file;
     $daily = read_db_from_file($daily_db_file);
@@ -29,6 +30,8 @@ foreach ($file_names as $daily_file) {
             }
         }
     }
+    $days_counter++;
+    if($days_counter>14) break;
 }
 
 $html = build_html_page($global, $ip);
