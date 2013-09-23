@@ -20,14 +20,11 @@ rsort($file_names);
 $html = build_html_page($file_names[0], $ip);
 echo $html;
 
-$exec_time = round(microtime(true) - $exec_time, 2);
-echo "[i] Execution time: $exec_time sec.<br>";
-
 function build_html_page($daily_file, $ip) {
     global $tmp_dir;
     global $tpl_dir;
     $daily_db_file = $tmp_dir . DIRECTORY_SEPARATOR . $daily_file;
-    $index_template_file = $tpl_dir . DIRECTORY_SEPARATOR . 'index.html';
+    $index_template_file = $tpl_dir . DIRECTORY_SEPARATOR . 'more.html';
     $block_template_file = $tpl_dir . DIRECTORY_SEPARATOR . 'block.html';
     $table_row_template_file = $tpl_dir . DIRECTORY_SEPARATOR . 'table-row.html';
     //Read daily data
@@ -64,6 +61,7 @@ function build_html_page($daily_file, $ip) {
         }
         $html_blocks = preg_replace('|<hr>$|', '', $html_blocks);
         $html = str_replace('$blocks', $html_blocks, $html_index_tpl);
+        $html = str_replace('$ip', $ip, $html);
         return $html;
     } else { //Daily db is empty
         return false;
