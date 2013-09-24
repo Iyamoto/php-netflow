@@ -24,7 +24,8 @@ foreach ($file_names as $daily_file) {
     if ($daily) { //Daily db exists
         if (isset($daily[$ip])) {//IP is in the db
             foreach ($daily[$ip] as $type => $evidences) {
-                foreach ($evidences as $evidence) {
+                $rev_evidences = array_reverse($evidences);
+                foreach ($rev_evidences as $evidence) {
                     $global[$ip][$type][] = $evidence;
                 }
             }
