@@ -104,6 +104,7 @@ $marks[] = 'proto udp and dst port 3544';//Teredo tunneling
 $num = 10; //Define number of top N for ntpdump
 $dst_ip_lvl = 3; //Action and report lvl for WAN DST IPs
 $dst_ip_lvl2 = 10; //Action and report lvl for LAN DST IPs
+$report_lvl = 20;//Report if evidences more then $report_lvl
 
 $debug = false;
 

@@ -53,10 +53,14 @@ if ($daily) { //Daily db exists
             echo "[i] IP $tmp_ip not found\n";
             $daily[$one_run_block['IP']][$one_run_block['type']] = $one_run_block['evidences'];
             //time for some action
+
             if (!$debug) {
-                $mail_results = action($emails, $one_run_block['IP'], $one_run_block['type'], $one_run_block['evidences']);
-                if ($mail_results)
-                    echo "[+] Mail sent\n";
+                $evidence_counter = sizeof($one_run_block['evidences']);
+                if ($evidence_counter > $report_lvl) {
+                    $mail_results = action($emails, $one_run_block['IP'], $one_run_block['type'], $one_run_block['evidences']);
+                    if ($mail_results)
+                        echo "[+] Mail sent\n";
+                }
                 else
                     var_dump($mail_results);
             }
